@@ -111,7 +111,7 @@ function App() {
 
       ScrollTrigger.create({
         snap: {
-          snapTo: (value, self) => {
+          snapTo: (value) => {
             // simplified snap logic with directional awareness
             const pinnedRanges = pinned.map(st => ({
               start: st.start / (ScrollTrigger.maxScroll(window) || 1),
