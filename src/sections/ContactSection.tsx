@@ -1,13 +1,13 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, Download, Loader2, Check } from 'lucide-react';
 import { toast } from 'sonner';
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 // Check if user prefers reduced motion
 const prefersReducedMotion = () => {

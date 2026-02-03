@@ -1,11 +1,9 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import { Search, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { poems, allTags } from '@/data/poems';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Check if user prefers reduced motion
 const prefersReducedMotion = () => {
@@ -21,14 +19,14 @@ export function PoemArchiveSection({ onPoemClick }: PoemArchiveSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState('all');
   const [visibleCount, setVisibleCount] = useState(4);
 
   const filteredPoems = poems.filter((poem) => {
     const matchesSearch = poem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         poem.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      poem.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTag = selectedTag === 'all' || poem.tags.includes(selectedTag);
     return matchesSearch && matchesTag;
   });
@@ -92,7 +90,7 @@ export function PoemArchiveSection({ onPoemClick }: PoemArchiveSectionProps) {
     >
       {/* Background overlay for this section */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/50 to-black/45 pointer-events-none" />
-      
+
       <div className="relative px-6 lg:px-[10vw] max-w-[1400px] mx-auto">
         {/* Header */}
         <div ref={headerRef} className="mb-8">
@@ -102,7 +100,7 @@ export function PoemArchiveSection({ onPoemClick }: PoemArchiveSectionProps) {
           >
             Poem Archive
           </h2>
-          
+
           {/* Search and Filters */}
           <div className="flex flex-col lg:flex-row gap-3 lg:items-center justify-between">
             <div className="relative w-full lg:w-72">
@@ -115,17 +113,16 @@ export function PoemArchiveSection({ onPoemClick }: PoemArchiveSectionProps) {
                 className="pl-11 bg-white/95 border-sunrise-text/10 rounded-full py-4 text-sm"
               />
             </div>
-            
+
             <div className="flex flex-wrap gap-1.5">
               {allTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
-                  className={`px-3.5 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
-                    selectedTag === tag
-                      ? 'bg-sunrise-accent text-white'
-                      : 'bg-white/90 text-sunrise-text-secondary hover:bg-sunrise-accent/10'
-                  }`}
+                  className={`px-3.5 py-2 rounded-full text-xs font-medium transition-all duration-300 ${selectedTag === tag
+                    ? 'bg-sunrise-accent text-white'
+                    : 'bg-white/90 text-sunrise-text-secondary hover:bg-sunrise-accent/10'
+                    }`}
                 >
                   {tag.charAt(0).toUpperCase() + tag.slice(1)}
                 </button>
@@ -152,7 +149,7 @@ export function PoemArchiveSection({ onPoemClick }: PoemArchiveSectionProps) {
                   loading="lazy"
                 />
               </div>
-              
+
               {/* Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap gap-1.5 mb-1.5">
@@ -172,7 +169,7 @@ export function PoemArchiveSection({ onPoemClick }: PoemArchiveSectionProps) {
                   {poem.excerpt}
                 </p>
               </div>
-              
+
               {/* Meta */}
               <div className="flex items-center gap-3 text-sunrise-text-secondary text-xs lg:text-sm">
                 <span>{new Date(poem.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>

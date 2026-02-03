@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Toaster } from '@/components/ui/sonner';
@@ -14,13 +14,7 @@ import { PoemModal } from '@/components/PoemModal';
 import { ScreenFlyingBirds } from '@/components/FlyingBirds';
 import { SoundToggle, useBirdSounds } from '@/components/SoundToggle';
 
-gsap.registerPlugin(ScrollTrigger);
-
-// Check if user prefers reduced motion
-const prefersReducedMotion = () => {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
+import { prefersReducedMotion } from '@/lib/gsap';
 
 function App() {
   const [activePoemSlug, setActivePoemSlug] = useState<string | null>(null);
@@ -30,7 +24,9 @@ function App() {
   // Enable bird sounds (only on desktop)
   useBirdSounds(soundEnabled);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+
+
     // Wait for all content to load before initializing scroll triggers
     const timer = setTimeout(() => {
       setIsLoaded(true);

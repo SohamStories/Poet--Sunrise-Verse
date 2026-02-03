@@ -1,11 +1,11 @@
 import { useEffect, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { FlyingBirds } from '@/components/FlyingBirds';
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 // Check if user prefers reduced motion
 const prefersReducedMotion = () => {
